@@ -5,7 +5,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-solanapdas = "A144kskvKXurwVMaEJHH9PPEMec1FSRjEGUGtvkvMCpW"
+solanapdas = "28LTUBketoKRtTh81VEBdnPzHMMMs5jbbhaaj2NdVEiv"
 
 [registry]
 url = "https://api.apr.dev"
