@@ -1,0 +1,57 @@
+# https://www.quicknode.com/guides/solana-development/spl-tokens/how-to-look-up-the-address-of-a-token-account
+# https://github.com/Unboxed-Software/solana-token-frontend
+# https://github.com/ZYJLiu/solana-token-frontend
+# https://solana.stackexchange.com/questions/9787/how-to-reliably-detect-sendtransaction-confirmation-errors
+# https://solana.com/developers/guides/advanced/confirmation
+# https://solana.com/developers/guides/advanced/retry#facts
+# https://www.quicknode.com/guides/solana-development/transactions/solana-transaction-propagation-handling-dropped-transactions
+
+spl-token address --owner HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL --token 9UfgBvyJNFDPajY6DjUZqpRzymrmUWzMttgDcw1w2Mf6 --verbose  -u https://api.devnet.solana.com 
+Wallet address: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+Associated token address: 5jp5siJVxRU5EtQ634NC1NinNqRpDfnxRcMYcyp48pJY
+
+spl-token address --owner HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL --token 9UfgBvyJNFDPajY6DjUZqpRzymrmUWzMttgDcw1w2Mf6 --verbose -ud
+Wallet address: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+Associated token address: 5jp5siJVxRU5EtQ634NC1NinNqRpDfnxRcMYcyp48pJY
+
+spl-token address --owner HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL --token 9UfgBvyJNFDPajY6DjUZqpRzymrmUWzMttgDcw1w2Mf6 --verbose -um
+Error: "Account 9UfgBvyJNFDPajY6DjUZqpRzymrmUWzMttgDcw1w2Mf6 not found"
+
+curl https://api.devnet.solana.com -X POST -H "Content-Type: application/json" -d '
+  {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "getTokenAccountsByOwner",
+    "params": [
+      "HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL",
+      {
+        "mint": "2UgWVdz7ys2uoEKsMDHgAWa2SG6LYNnJhDGoeAZ4PbbN"
+      },
+      {
+        "encoding": "jsonParsed"
+      }
+    ]
+  }
+'
+{"jsonrpc":"2.0","result":{"context":{"apiVersion":"2.1.15","slot":369337822},"value":[{"account":{"data":{"parsed":{"info":{"isNative":false,"mint":"2UgWVdz7ys2uoEKsMDHgAWa2SG6LYNnJhDGoeAZ4PbbN","owner":"HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL","state":"initialized","tokenAmount":{"amount":"0","decimals":0,"uiAmount":0.0,"uiAmountString":"0"}},"type":"account"},"program":"spl-token","space":165},"executable":false,"lamports":2039280,"owner":"TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA","rentEpoch":18446744073709551615,"space":165},"pubkey":"xQYbfPKGXBPeZTrVfBKDfrrpnKB1ZwWVAEBxt4isSwa"}]},"id":1}
+
+curl https://api.mainnet-beta.solana.com -X POST -H "Content-Type: application/json" -d '
+  {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "getTokenAccountsByOwner",
+    "params": [
+      "HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL",
+      {
+        "mint": "2UgWVdz7ys2uoEKsMDHgAWa2SG6LYNnJhDGoeAZ4PbbN"
+      },
+      {
+        "encoding": "jsonParsed"
+      }
+    ]
+  }
+'
+{"jsonrpc":"2.0","error":{"code":-32602,"message":"Invalid param: could not find mint"},"id":1}
+
+
+

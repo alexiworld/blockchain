@@ -1,0 +1,13 @@
+mkdir token-address && cd token-address && echo > address.js
+
+yarn init -y
+yarn add @solana/web3.js@1
+
+npm init -y
+npm install --save @solana/web3.js@1
+
+node address
+
+Result is ...
+
+Using Solana-Web3.js:  xQYbfPKGXBPeZTrVfBKDfrrpnKB1ZwWVAEBxt4isSwa

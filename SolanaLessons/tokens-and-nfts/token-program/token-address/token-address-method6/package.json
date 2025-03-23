@@ -1,0 +1,11 @@
+{
+  "name": "token-address-6",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@solana-program/token": "^0.5.1",
+    "@solana/kit": "^2.1.0",
+    "@solana/web3.js": "2"
+  }
+}

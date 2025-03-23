@@ -1,0 +1,73 @@
+# https://solana.com/developers/courses/tokens-and-nfts/
+npx esrun create-token-mint.ts
+npx esrun create-token-metadata.ts
+npx esrun create-token-account.ts
+npx esrun mint-tokens.ts
+npx esrun transfer-tokens.ts
+
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# npx esrun create-token-mint.ts 
+🔑 Loaded our keypair securely, using an env file! Our public key is: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+✅ Finished! Created token mint: https://explorer.solana.com/address/H3fC8X2PgNX54UZwti8GKiiZmPTeKGznmVGqkAny7wfs?cluster=devnet
+
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# npx esrun create-token-metadata.ts 
+🔑 We've loaded our keypair securely, using an env file! Our public key is: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+✅ Transaction confirmed, explorer link is: https://explorer.solana.com/tx/37vgeqwuxbDHs5J2yTca4K217BukzxZQnmjPYoZQx9o63jdKxUPhQNNJgibRajAN3qb1eLcJ1HxSzyJENkXu5nDR?cluster=devnet
+✅ Look at the token mint again: https://explorer.solana.com/address/H3fC8X2PgNX54UZwti8GKiiZmPTeKGznmVGqkAny7wfs?cluster=devnet
+
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# npx esrun create-token-account.ts 
+🔑 Loaded our keypair securely, using an env file! Our public key is: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+Token Account: 2RAjTnehUsY1U6CGdSTaRqX6LSFXZXbgjbLXqbA6dPXJ
+✅ Created token Account: https://explorer.solana.com/address/2RAjTnehUsY1U6CGdSTaRqX6LSFXZXbgjbLXqbA6dPXJ?cluster=devnet
+
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# npx esrun mint-token.ts 
+✅ Success! Mint Token Transaction: https://explorer.solana.com/tx/38JzH4eq39VvMGSdSDNBrJLDVAZdpzxiDQ413hpQNLZv5n62kfMDLS9gzbf721nNruEia4XEKum78tbphZ1RjSR3?cluster=devnet
+
+
+NOTE: Temporarily update .env 's content to EAC9's keys to generate token account for EAC9.
+
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# cat .env 
+SECRET_KEY="[23, 189,  53, 159, 167,  24, 222,  23, 237, 221, 157, 224,  36,  33, 244,  87, 185, 157, 147,  82,  46,   7, 201, 135, 250, 163, 246, 130,  66, 199, 109, 116, 247,  93,  70,  34,  88, 216, 238,  82, 104, 134, 126,  33,  58,  81, 241, 209, 150, 176,  33, 172, 177,  20, 123, 212, 174, 108, 152, 182, 196,  56,  33, 225]"
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# solana address -k /root/.config/solana/id.json.EAC9 
+EAC9c58fqMDD9NaoTZJcLxXkrtRTL6zxJ2G632NEi9Tq
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# cat /root/.config/solana/id.json.EAC9
+[244,67,242,135,63,22,2,126,172,192,225,59,30,18,228,99,240,115,31,187,5,81,175,123,170,146,126,110,60,241,240,187,195,130,195,71,151,27,244,122,29,146,65,62,137,180,78,123,55,89,93,121,222,146,154,115,105,38,179,64,11,49,145,204]root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# vim ../../intro-to-solana/
+
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# npx esrun create-token-account.ts
+🔑 Loaded our keypair securely, using an env file! Our public key is: EAC9c58fqMDD9NaoTZJcLxXkrtRTL6zxJ2G632NEi9Tq
+Token Account: 7wSfxf29q9XzdmKKbuTBSnQLwSFTgygJVa2tMhwpbFEp
+✅ Created token Account: https://explorer.solana.com/address/7wSfxf29q9XzdmKKbuTBSnQLwSFTgygJVa2tMhwpbFEp?cluster=devnet
+
+NOTE: By mistake recipient was set to EAC9 token account address and not to EAC9 address. The result is off curve error.
+
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# npx esrun transfer-tokens.ts 
+🔑 Loaded our keypair securely, using an env file! Our public key is: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+💸 Attempting to send 1 token to 7wSfxf29q9XzdmKKbuTBSnQLwSFTgygJVa2tMhwpbFEp...
+/home/ubuntu/nodedev/tokens-and-nfts/token-program/node_modules/@solana/spl-token/src/state/mint.ts:197
+    if (!allowOwnerOffCurve && !PublicKey.isOnCurve(owner.toBuffer())) throw new TokenOwnerOffCurveError();
+                                                                             ^
+
+
+TokenOwnerOffCurveError
+    at getAssociatedTokenAddressSync (/home/ubuntu/nodedev/tokens-and-nfts/token-program/node_modules/@solana/spl-token/src/state/mint.ts:197:78)
+    at getOrCreateAssociatedTokenAccount (/home/ubuntu/nodedev/tokens-and-nfts/token-program/node_modules/@solana/spl-token/src/actions/getOrCreateAssociatedTokenAccount.ts:41:29)
+    at <anonymous> (/home/ubuntu/nodedev/tokens-and-nfts/token-programtransfer-tokens.ts:48:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+Node.js v23.9.0
+
+NOTE: Changed recipent to EAC9 address. The code will derive EAC9 token account address from EAC9 and mint addresses.
+
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# npx esrun transfer-tokens.ts 
+🔑 Loaded our keypair securely, using an env file! Our public key is: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+💸 Attempting to send 1 token to EAC9c58fqMDD9NaoTZJcLxXkrtRTL6zxJ2G632NEi9Tq...
+?~_~R? Attempt by HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL...
+✅ Transaction confirmed, explorer link is: https://explorer.solana.com/tx/2DnFyfZG545SBqHCVDLPMA5cJR8GHf7pY84ivbDcGBUGnqJZ8wEDXtdcmSjaHLzTR2QJiASTKwNwXdRRnLZ9nNFZ?cluster=devnet
+
+root@0bb3eaba9419:/home/ubuntu/nodedev/tokens-and-nfts/token-program# npx esrun transfer-tokens.ts 
+🔑 Loaded our keypair securely, using an env file! Our public key is: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+💸 Attempting to send 1 token to EAC9c58fqMDD9NaoTZJcLxXkrtRTL6zxJ2G632NEi9Tq...
+?~_~R? Attempt by HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL...
+?~_~R? Source (associated) token account 2RAjTnehUsY1U6CGdSTaRqX6LSFXZXbgjbLXqbA6dPXJ...
+?~_~R? Destination (associated) token account 7wSfxf29q9XzdmKKbuTBSnQLwSFTgygJVa2tMhwpbFEp...
+✅ Transaction confirmed, explorer link is: https://explorer.solana.com/tx/33ZmUYGNFtJ19x6qkfossMVaAPHJ87Yrj7wPA1UJsitsN5GmjG9GsonLEkrFbSA2hk1r1QCLHih7eQibcNyqJDJQ?cluster=devnet
+

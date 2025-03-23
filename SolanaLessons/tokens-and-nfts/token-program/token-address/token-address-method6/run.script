@@ -1,0 +1,8 @@
+mkdir token-address-method6 && cd token-address-method6 && echo > address.ts
+yarn init -y
+yarn add @solana/web3.js@2 @solana-program/token
+yarn add @solana/kit
+npx esrun address.ts 
+
+Using Solana-Web3.j@2:  xQYbfPKGXBPeZTrVfBKDfrrpnKB1ZwWVAEBxt4isSwa
+

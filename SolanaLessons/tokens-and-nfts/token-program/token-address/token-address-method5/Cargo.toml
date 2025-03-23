@@ -1,0 +1,8 @@
+[package]
+name = "token-address"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+solana-sdk = "1.16.14"
+spl-associated-token-account = "2.2.0"

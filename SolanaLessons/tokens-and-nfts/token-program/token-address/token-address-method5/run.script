@@ -1,0 +1,7 @@
+cargo new token-address
+mv token-address cd token-address-method5
+cd token-address-method5
+cargo build
+cargo run
+
+Build failed ... and did not get to see it

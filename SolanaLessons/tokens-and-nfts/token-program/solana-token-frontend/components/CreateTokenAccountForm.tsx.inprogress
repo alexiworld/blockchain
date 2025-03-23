@@ -1,0 +1,99 @@
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import * as web3 from '@solana/web3.js'
+import { FC, useState } from 'react'
+import styles from '../styles/Home.module.css'
+import { PublicKey } from "@solana/web3.js";
+import {
+	TOKEN_PROGRAM_ID,
+  ASSOCIATED_TOKEN_PROGRAM_ID,
+  getAssociatedTokenAddress,
+  createAssociatedTokenAccountInstruction,
+} from "@solana/spl-token";
+
+
+export const CreateTokenAccountForm: FC = () => {
+	const [txSig, setTxSig] = useState('');
+	const [mint, setMint] = useState('');
+	const [owner, setOwner] = useState('');
+	const [tokenAccount, setTokenAccount] = useState('')
+
+	const { connection } = useConnection();
+	const { publicKey, sendTransaction } = useWallet();
+	const link = () => {
+		return txSig ? `https://explorer.solana.com/tx/${txSig}?cluster=devnet` : ''
+	}
+
+	//setRecipient(publicKey.toBase58());
+
+	const createTokenAccount = async (event) => {
+		event.preventDefault()
+		if (!connection || !publicKey) { return }
+
+		console.log(`Mint: ${mint}`);
+		console.log(`Token Account: ${owner}`);
+  
+		const mintAccount = new PublicKey(mint);
+		const ownerAccount = new PublicKey(owner);
+
+		console.log(`Mint: ${mintAccount.toBase58()}`);
+		console.log(`Token Account: ${ownerAccount.toBase58()}`);
+  
+		const associatedToken = await getAssociatedTokenAddress(
+  		mintAccount,
+  		ownerAccount,
+  		false,
+			TOKEN_PROGRAM_ID,
+      ASSOCIATED_TOKEN_PROGRAM_ID
+ 		);
+
+    const transaction = new web3.Transaction().add(
+    	createAssociatedTokenAccountInstruction(
+      	publicKey,
+      	associatedToken,
+      	ownerAccount,
+      	mintAccount,
+				TOKEN_PROGRAM_ID,
+ 				ASSOCIATED_TOKEN_PROGRAM_ID
+    	)
+  	);
+
+		console.log(`Associated Token Account: ${associatedToken.address}`);
+
+		sendTransaction(transaction, connection).then((sig) => {
+			setTxSig(sig);
+			setTokenAccount(associatedToken.address);
+		}); 
+	}
+
+  return (
+      <div>
+        {
+          publicKey ? (
+            <form onSubmit={createTokenAccount} className={styles.form}>
+              <label htmlFor="mint">Mint:</label>
+              <input id="mint" type="text" onChange={(event) => setMint(event.target.value)} className={styles.formField} placeholder="e.g. AaUnDTi39XHvm155JtqJPDv8KT9QZ89XrM6QzRAz3fJE" required />
+              <br />
+              <label htmlFor="owner">Owner:</label>
+              <input id="owner" type="text" onChange={(event) => setOwner(event.target.value)} className={styles.formField} placeholder="e.g. HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL" required />
+              <button type="submit" className={styles.formButton}>
+                Create Token Account
+              </button>
+							<label htmlFor="tokenAccount">Token Account:</label>
+              <input id="tokenAccount" type="text" value={tokenAccount} className={styles.formField} readonly="readonly" />
+            </form>
+          ) : (
+            <span>Connect Your Wallet</span>
+          )
+        }
+        {
+          txSig ?
+            <div>
+              <p>View your transaction on </p>
+              <a href={link()}>Solana Explorer</a>
+            </div> :
+            null
+        }
+      </div>
+    );
+  
+};
