@@ -1,0 +1,15 @@
+npx esrun delegate-tokens.ts 
+🔑 Loaded keypair. Public key: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+✅ Delegate approved. Transaction: https://explorer.solana.com/tx/41z3RVHXvFBmrFPGDaT2kTGiNLB3iykdhZwY1UDCCeSjSEexQcadA9V75hHciveD5GoR9q8qVnAhT6TczgoyFjsW?cluster=devnet
+
+npx esrun revoke-approve-tokens.ts 
+🔑 Loaded keypair. Public key: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+✅ Revoke Delegate Transaction: https://explorer.solana.com/tx/559thgs6tVffezW32oNwtwwxM8LsXporbXHAvK5Eb7DwB1P2oXsgYP2JaJiQf18bUkfA7pnhVAewyvPaFFGdAVeh?cluster=devnet
+
+npx esrun mint-token.ts 
+✅ Success! Mint Token Transaction: https://explorer.solana.com/tx/5eywN1VeZeg57hvaftwHPZwZ8Lhq9RESZwdBGFHvz5YzYz8CyQbbhAvj5KsUk6yRE5msCAfS9grESDTRTT8r9izo?cluster=devnet
+
+npx esrun burn-tokens.ts 
+🔑 Loaded keypair. Public key: HecCDJPrmZ3t4qSrxsk8FxtiACLAsJZqpGRotL1pJoCL
+✅ Burn Transaction: https://explorer.solana.com/tx/Lyu8EyCEh4pYLMk1CnRJiff17Ustk4JMZGawX6u5u8VZ8a5XzvJ1uVi3MrXZ2X1p3aoZhQqsQxYYf2nWfABTjSY?cluster=devnet
+
