@@ -1,0 +1,19 @@
+root@185ee0f3ce88:/blockchain/SolanaLessons/tokens-and-nfts/nfts-with-metaplex# npx esrun create-metaplex-nft-collection.ts
+Loaded user: EAC9c58fqMDD9NaoTZJcLxXkrtRTL6zxJ2G632NEi9Tq
+Creating collection...
+Created collection 📦! Address is: https://explorer.solana.com/address/9GCvvVH6oYcbEGUr5QgWEHn7ZTPKMbLhn7YwxDxySdJn?cluster=devnet
+✅ Finished successfully!
+root@185ee0f3ce88:/blockchain/SolanaLessons/tokens-and-nfts/nfts-with-metaplex# npx esrun create-nft.ts
+Loaded user: EAC9c58fqMDD9NaoTZJcLxXkrtRTL6zxJ2G632NEi9Tq
+Creating NFT...
+✨🖼️ Created NFT! Address is: https://explorer.solana.com/address/Apq8nDBzxKHtibjwpibj8GMXxmbB49VBF8XciFjYMhrS?cluster=devnet
+✅ Finished successfully!
+root@185ee0f3ce88:/blockchain/SolanaLessons/tokens-and-nfts/nfts-with-metaplex# npx esrun verify-nft.ts
+Loaded user: EAC9c58fqMDD9NaoTZJcLxXkrtRTL6zxJ2G632NEi9Tq
+✅ NFT Apq8nDBzxKHtibjwpibj8GMXxmbB49VBF8XciFjYMhrS verified as member of collection 9GCvvVH6oYcbEGUr5QgWEHn7ZTPKMbLhn7YwxDxySdJn! See Explorer at https://explorer.solana.com/address/Apq8nDBzxKHtibjwpibj8GMXxmbB49VBF8XciFjYMhrS?cluster=devnet
+✅ Finished successfully!
+root@185ee0f3ce88:/blockchain/SolanaLessons/tokens-and-nfts/nfts-with-metaplex# npx esrun update-nft.ts
+Loaded user: EAC9c58fqMDD9NaoTZJcLxXkrtRTL6zxJ2G632NEi9Tq
+🆕 NFT updated with new metadata: https://explorer.solana.com/address/Apq8nDBzxKHtibjwpibj8GMXxmbB49VBF8XciFjYMhrS?cluster=devnet
+✅ Finished successfully!
+root@185ee0f3ce88:/blockchain/SolanaLessons/tokens-and-nfts/nfts-with-metaplex#
