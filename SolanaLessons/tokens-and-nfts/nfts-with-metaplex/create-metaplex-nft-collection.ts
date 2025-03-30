@@ -2,6 +2,7 @@
 import 'dotenv/config';
 import { getKeypairFromEnvironment } from '@solana-developers/helpers';
 
+import { promises as fs } from 'fs';
 import {
   createNft,
   fetchDigitalAsset,
@@ -13,7 +14,9 @@ import {
   getKeypairFromFile,
 } from '@solana-developers/helpers';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys';
 import {
+  createGenericFile,
   generateSigner,
   keypairIdentity,
   percentAmount,
@@ -42,6 +45,28 @@ const umi = createUmi(connection.rpcEndpoint);
 umi.use(mplTokenMetadata());
 const umiUser = umi.eddsa.createKeypairFromSecretKey(user.secretKey);
 umi.use(keypairIdentity(umiUser));
+umi.use(irysUploader());
+
+//
+const collectionImagePath = path.resolve(__dirname, 'collection.png');
+
+console.log(`collectionImagePath: ${collectionImagePath}`);
+const buffer = await fs.readFile(collectionImagePath);
+let file = createGenericFile(buffer, collectionImagePath, {
+  contentType: 'image/png',
+});
+const [image] = await umi.uploader.upload([file]);
+console.log('image uri:', image);
+
+// upload offchain json to Arweave using irys
+const uri = await umi.uploader.uploadJson({
+  name: 'My Collection',
+  symbol: 'MC',
+  description: 'My Collection description',
+  image,
+});
+console.log('Collection offchain metadata URI:', uri);
+//
 
 console.log(`Creating collection...`);
 // This mint is like a factory for creating NFTs
@@ -52,7 +77,9 @@ const transaction = await createNft(umi, {
   name: 'My Collection',
   symbol: 'MC',
   // https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard
-  uri: 'https://raw.githubusercontent.com/solana-developers/professional-education/main/labs/sample-nft-collection-offchain-data.json',
+  // uri: 'https://raw.githubusercontent.com/solana-developers/professional-education/main/labs/sample-nft-collection-offchain-data.json',
+  uri,
+  updateAuthority: umi.identity.publicKey,
   sellerFeeBasisPoints: percentAmount(0),
   isCollection: true,
 });
