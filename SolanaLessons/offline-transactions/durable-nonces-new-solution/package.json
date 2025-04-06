@@ -1,0 +1,32 @@
+{
+  "name": "solana-token-metadata-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-mocha -r tsx --timeout 40000 test/**.ts",
+    "test": "ts-mocha -r tsx --timeout 40000 test/**.ts",
+    "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
+    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bn.js": "^5.1.6",
+    "@types/mocha": "^10.0.8",
+    "@types/chai": "^4.3.19",
+    "prettier": "^3.3.3",
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.7.0",
+    "chai": "^5.1.1",
+    "mocha": "^10.7.3",
+    "typescript": "^5.6.2",
+    "tsx": "^3.12.5"
+  },
+  "dependencies": {
+    "@solana-developers/helpers": "^2.5.5",
+    "@typescript-eslint/parser": "^6.20.0",
+    "dotenv": "^16.4.5"
+  }
+}
